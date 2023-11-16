@@ -1,16 +1,18 @@
 #!/usr/bin/python3
-"""for a given emp ID, returns info about his/her TODO list progress."""
+"""For a given emp ID, returns info about his/her TODO list progress."""
 
-from sys import argv
 import json
 import urllib.request
+from sys import argv
 
 
 if __name__ == '__main__':
     url = 'https://jsonplaceholder.typicode.com'
     user_id = argv[1]
 
-    with urllib.request.urlopen(f'{url}/users/{user_id}/todos?_expand=user') as response:
+    with urllib.request.urlopen(
+        f'{url}/users/{user_id}/todos?_expand=user'
+        ) as response:
         if response.getcode() == 200:
             jsondata = json.loads(response.read())
             name = jsondata[0]['user']['name']
