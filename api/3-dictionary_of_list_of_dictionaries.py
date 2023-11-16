@@ -53,5 +53,3 @@ if __name__ == '__main__':
     # Write to JSON file
     with open("todo_all_employees.json", mode='w') as json_file:
         json.dump(all_users_data, json_file)
-
-    print("Data has been exported to todo_all_employees.json")
