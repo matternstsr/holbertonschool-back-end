@@ -29,8 +29,9 @@ if __name__ == '__main__':
             total_tasks = len(todo_data)
 
             # Display the summary
-            first_str = f"Employee {employee_name} is done with tasks"
-            print(f"{first_str} ({num_completed_tasks}/{total_tasks}):")
+            first_line = "Employee {} is done with tasks({}/{}):".format(employee_name, num_completed_tasks, total_tasks)
+            print(first_line)
+            
             for task in completed_tasks:
                 print(f"\t {task['title']}")
         else:
