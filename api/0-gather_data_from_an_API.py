@@ -8,7 +8,7 @@ if __name__ == '__main__':
     url = 'https://jsonplaceholder.typicode.com'
     user_id = argv[1]
 
-    with urllib.request.urlopen(f'{url}/{user_id}/todos?_expand=user') as response:
+    with urllib.request.urlopen(f'{url}/users/{user_id}/todos?_expand=user') as response:
         if response.getcode() == 200:
             jsondata = json.loads(response.read())
             name = jsondata[0]['user']['name']
