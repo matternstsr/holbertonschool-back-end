@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """For a given emp ID, returns info about his/her TODO list progress."""
+from sys import argv
 import json
 import urllib.request
 
@@ -18,7 +19,7 @@ if __name__ == '__main__':
             numberdone = len(donetasks)
             alltasks = len(jsondata)
 
-            first_str = f"Employee {name} is done with tasks"
+            first_str = f"Employer {name} is done with tasks"
 
             print(f"{first_str} ({numberdone}/{alltasks}):")
             for task in donetasks:
