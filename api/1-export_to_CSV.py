@@ -5,7 +5,6 @@ import json
 from sys import argv
 import urllib.request
 
-
 if __name__ == '__main__':
     # Base URL for the JSONPlaceholder API
     base_api_url = 'https://jsonplaceholder.typicode.com'
@@ -27,8 +26,8 @@ if __name__ == '__main__':
             # Create and open a CSV file for writing
             csv_file_name = f"{target_user_id}.csv"
             with open(csv_file_name, mode='w', newline='') as csv_file:
-                # Create a CSV writer for the CSV file
-                csv_writer = csv.writer(csv_file)
+                # Create a CSV writer for the CSV file with quoting
+                csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
 
                 # Write the header for the CSV - not needed come to find out
                 # csv_writer.writerow(["USER_ID", "USERNAME",
