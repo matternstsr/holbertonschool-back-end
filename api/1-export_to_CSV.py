@@ -35,12 +35,12 @@ if __name__ == '__main__':
 
                 # Write the header for the CSV
                 csv_writer.writerow(["USERNAME", "USER_ID",
-                                        "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+                                    "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
                 # Write all completed task within completed to the CSV file
                 for task in completed_tasks:
                     csv_writer.writerow([target_user_id, employee_name,
-                                            "Completed", task['title']])
+                                        "Completed", task['title']])
 
             print(f"CSV file '{csv_file_name}' has been created.")
         else:
