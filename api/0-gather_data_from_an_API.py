@@ -2,7 +2,6 @@
 """For a given emp ID, returns info about his/her TODO list progress."""
 import json
 import urllib.request
-from sys import argv
 
 
 if __name__ == '__main__':
