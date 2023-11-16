@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """returns info todo list progress based on the userid."""
+from sys import argv
 import json
 import urllib.request
-from sys import argv
 
 if __name__ == '__main__':
     api_url = 'https://jsonplaceholder.typicode.com'
