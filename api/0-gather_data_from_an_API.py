@@ -1,25 +1,25 @@
 #!/usr/bin/python3
-"""Script that, using this REST API, for a given employee"""
-import requests
+'''returns info todo list progress based on the userid.'''
+import json
+import urllib.request
 from sys import argv
 
-apiforurl = 'https://jsonplaceholder.typicode.com'
-
 if __name__ == '__main__':
-    user_info_response = requests.get(f"{apiforurl}/users/{argv[1]}")
-    user_data = user_info_response.json()
+    api_url = 'https://jsonplaceholder.typicode.com'
+    user_id = argv[1]
 
-    tasks_response = requests.get(f"{apiforurl}/todos?userId={argv[1]}")
-    task_info  tasks_response.json()
+    with urllib.request.urlopen(f'{api_url}/users/{user_id}/todos?_expand=user') as response:
+        if response.getcode() == 200:
+            todo_data = json.loads(response.read())
+            employee_name = todo_data[0]['user']['name']
+            completed_tasks = [task for task in todo_data if task['completed']]
+            num_completed_tasks = len(completed_tasks)
+            total_tasks = len(todo_data)
 
-    completed_tasks = [task for task in task_info if task['completed']]
+            first_str = f"Employer {employee_name} is done with tasks"
 
-    emp_name = user_data["name"]
-    num_completed_tasks = len(completed_tasks)
-    all_tasks = len(task_info)
-
-    print("Employee {} is done with tasks({}/{}):".format(
-        emp_name, num_completed_tasks, all_tasks))
-
-    for task in completed_tasks:
-        print(f"\t {task['title']}")
+            print(f"{first_str} ({num_completed_tasks}/{total_tasks}):")
+            for task in completed_tasks:
+                print(f"\t {task['title']}")
+        else:
+            print(f"Error: {response.getcode()}")
