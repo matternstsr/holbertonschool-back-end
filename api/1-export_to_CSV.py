@@ -24,23 +24,21 @@ if __name__ == '__main__':
             # Extract employee name from the first task
             employee_name = todo_data[0]['user']['name']
 
-            # Filter completed tasks
-            completed_tasks = [task for task in todo_data if task['completed']]
-
             # Create and open a CSV file for writing
             csv_file_name = f"{target_user_id}.csv"
             with open(csv_file_name, mode='w', newline='') as csv_file:
-                # Create a CSV writer for CSV file
+                # Create a CSV writer for the CSV file
                 csv_writer = csv.writer(csv_file)
 
-                # Write the header for the CSV
-                csv_writer.writerow(["USERNAME", "USER_ID",
-                                    "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+                # Write the header for the CSV - not needed come to find out
+                #csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
-                # Write all completed task within completed to the CSV file
-                for task in completed_tasks:
+                # Write all tasks to the CSV file
+                for task in todo_data:
+                    # Convert the completed status to "True" or "False" not sort by completed
+                    completed_status = "True" if task['completed'] else "False"
                     csv_writer.writerow([target_user_id, employee_name,
-                                        "Completed", task['title']])
+                                        completed_status, task['title']])
 
             print(f"CSV file '{csv_file_name}' has been created.")
         else:
