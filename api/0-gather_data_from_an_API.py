@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""For a given emp ID, returns info about his/her TODO list progress."""
+"""TODO list progress for an employee ID."""
 import json
 import urllib.request
 from sys import argv
+
 
 if __name__ == '__main__':
     url = 'https://jsonplaceholder.typicode.com'
