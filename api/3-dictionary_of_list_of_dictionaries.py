@@ -26,7 +26,6 @@ def fetch_todo_data(user_id):
             exit()
 
 if __name__ == '__main__':
-
     all_users_data = {}
 
     for user_id in argv[1:]:
@@ -35,14 +34,11 @@ if __name__ == '__main__':
         user_data = fetch_user_data(user_id)
         todo_data = fetch_todo_data(user_id)
 
-        user_tasks = [
-            {
+        user_tasks = [{
                 "username": user_data['username'],
                 "task": task['title'],
-                "completed": task['completed']
-            }
-            for task in todo_data
-        ]
+                "completed": task['completed']}
+            for task in todo_data]
 
         all_users_data[user_id] = user_tasks
 
@@ -50,4 +46,5 @@ if __name__ == '__main__':
     with open("todo_all_employees.json", mode='w') as json_file:
         json.dump(all_users_data, json_file)
 
-    print("Data has been exported to todo_all_employees.json")
+    
+    #print("Data has been exported to todo_all_employees.json")
