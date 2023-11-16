@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-'''for a given emp ID, returns info about his/her TODO list progress.'''
+"""for a given emp ID, returns info about his/her TODO list progress."""
+
+from sys import argv
 import json
 import urllib.request
-from sys import argv
+
 
 if __name__ == '__main__':
     url = 'https://jsonplaceholder.typicode.com'
