@@ -7,9 +7,9 @@ from sys import argv
 if __name__ == '__main__':
     api_url = 'https://jsonplaceholder.typicode.com'
     user_id = argv[1]
-    
+
     with urllib.request.urlopen(
-    f'{api_url}/users/{user_id}/todos?_expand=user'
+        f'{api_url}/users/{user_id}/todos?_expand=user'
     ) as response:
         if response.getcode() == 200:
             todo_data = json.loads(response.read())
