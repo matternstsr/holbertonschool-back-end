@@ -31,11 +31,13 @@ if __name__ == '__main__':
                 csv_writer = csv.writer(csv_file)
 
                 # Write the header for the CSV - not needed come to find out
-                #csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+                # csv_writer.writerow(["USER_ID", "USERNAME",
+                # "TASK_COMPLETED_STATUS", "TASK_TITLE"])
 
                 # Write all tasks to the CSV file
                 for task in todo_data:
-                    # Convert the completed status to "True" or "False" not sort by completed
+                    # Convert the completed status to "True" or "False"
+                    # not sort by completed
                     completed_status = "True" if task['completed'] else "False"
                     csv_writer.writerow([target_user_id, employee_name,
                                         completed_status, task['title']])
