@@ -38,8 +38,13 @@ if __name__ == '__main__':
                     # Convert the completed status to "True" or "False"
                     # not sort by completed
                     completed_status = "True" if task['completed'] else "False"
-                    csv_writer.writerow([target_user_id, employee_name,
-                                        completed_status, task['title']])
+                    for task in todo_response:
+                    writer.writerow([
+                        user_response['id'],
+                        user_response['username'],
+                        task[completed_status],
+                        task['title']
+                    ])
 
             print(f"CSV file '{csv_file_name}' has been created.")
         else:
