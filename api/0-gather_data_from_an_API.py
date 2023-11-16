@@ -30,8 +30,8 @@ if __name__ == '__main__':
 
             # Display the summary
             first_line = (
-                f"Employee {employee_name} is done with tasks({num_completed_tasks}/{total_tasks}):"
-            )
+                f"Employee {employee_name} is done with tasks"
+                f"({num_completed_tasks}/{total_tasks}):")
             print(first_line)
 
             for task in completed_tasks:
