@@ -1,39 +1,26 @@
 #!/usr/bin/python3
-"""TODO list progress for an employee ID."""
-import json
-import urllib.request
+"""Script that, using this REST API, for a given employee"""
+import requests
 from sys import argv
 
+apiforurl = 'https://jsonplaceholder.typicode.com'
+
 if __name__ == '__main__':
-    if len(argv) != 2:
-        print("Usage: python script_name.py <user_id>")
-        exit(1)
+    user_info_response = requests.get(f"{apiforurl}/users/{argv[1]}")
+    user_data = user_info_response.json()
+    
+    tasks_response = requests.get(f"{apiforurl}/todos?userId={argv[1]}")
+    task_info = tasks_response.json()
+    
+    completed_tasks = [task for task in task_info if task['completed']]
+    
+    emp_name = user_data["name"]
+    num_completed_tasks = len(completed_tasks)
+    all_tasks = len(task_info)
+    
+    print("Employee {} is done with tasks({}/{}):".format(
+        emp_name, num_completed_tasks, all_tasks))
+    
+    for task in completed_tasks:
+        print(f"\t {task['title']}")
 
-    url = 'https://jsonplaceholder.typicode.com'
-    user_id = argv[1]
-
-    try:
-        with urllib.request.urlopen(
-                f'{url}/users/{user_id}/todos?_expand=user'
-        ) as response:
-            if response.getcode() == 200:
-                jsondata = json.loads(response.read())
-                if jsondata:
-                    name = jsondata[0]['user']['name']
-                    donetsks = [task for task in jsondata if task['completed']]
-                    numberdone = len(donetsks)
-                    alltasks = len(jsondata)
-
-                    first_str = f"Employee {name} is done with tasks"
-
-                    print(
-                        f"{first_str} ({numberdone}/{alltasks}):"
-                    )
-                    for task in donetsks:
-                        print(f"\t {task['title']}")
-                else:
-                    print(f"No data found for user ID {user_id}")
-            else:
-                print(f"Error: {response.getcode()}")
-    except urllib.error.URLError as e:
-        print(f"Error: {e}")
