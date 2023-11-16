@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""returns info todo list progress based on the userid."""
+'''returns info todo list progress based on the userid.'''
 import json
 from sys import argv
 import urllib.requests
