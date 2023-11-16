@@ -1,51 +1,44 @@
 #!/usr/bin/python3
-"""returns info todo list progress based on the userid."""
+"""Script to export data in the CSV format."""
 import csv
 import json
 from sys import argv
 import urllib.request
 
+API_URL = 'https://jsonplaceholder.typicode.com'
+
+
 if __name__ == '__main__':
-    # Base URL for the JSONPlaceholder API
-    base_api_url = 'https://jsonplaceholder.typicode.com'
+    USER_ID = argv[1]
 
-    # Retrieve user ID from command-line arguments
-    target_user_id = argv[1]
-
-    # Make a request to the API to fetch the to-do list for the specified user
-    with urllib.request.urlopen(
-        f'{base_api_url}/users/{target_user_id}/todos?_expand=user'
-    ) as response:
-        if response.getcode() == 200:
-            # Load JSON data from the response
-            todo_data = json.loads(response.read())
-
-            # Extract employee name from the first task
-            employee_name = todo_data[0]['user']['name']
-
-            # Create and open a CSV file for writing
-            csv_file_name = f"{target_user_id}.csv"
-            with open(csv_file_name, mode='w', newline='') as csv_file:
-                # Create a CSV writer for the CSV file with quoting
-                csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-
-                # Write the header for the CSV - not needed come to find out
-                # csv_writer.writerow(["USER_ID", "USERNAME",
-                # "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-
-                # Write all tasks to the CSV file
-                for task in todo_data:
-                    # Convert the completed status to "True" or "False"
-                    # not sort by completed
-                    completed_status = "True" if task['completed'] else "False"
-                    for task in todo_response:
-                    writer.writerow([
-                        user_response['id'],
-                        user_response['username'],
-                        task[completed_status],
-                        task['title']
-                    ])
-
-            print(f"CSV file '{csv_file_name}' has been created.")
+    # User information
+    user_url = f"{API_URL}/users/{USER_ID}"
+    with urllib.request.urlopen(user_url) as user_response:
+        if user_response.getcode() == 200:
+            user_data = json.loads(user_response.read())
         else:
-            print(f"Error: {response.getcode()}")
+            print(f"Error: {user_response.getcode()}")
+            exit()
+
+    # Todo list for the given user
+    todo_url = f"{API_URL}/todos?userId={USER_ID}"
+    with urllib.request.urlopen(todo_url) as todo_response:
+        if todo_response.getcode() == 200:
+            todo_data = json.loads(todo_response.read())
+        else:
+            print(f"Error: {todo_response.getcode()}")
+            exit()
+
+    # Write to CSV file
+    with open(f"{USER_ID}.csv", mode='w') as csv_file:
+        writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
+
+        for task in todo_data:
+            writer.writerow([
+                user_data['id'],
+                user_data['username'],
+                task['completed'],
+                task['title']
+            ])
+
+    print(f"Data has been exported to {USER_ID}.csv")
