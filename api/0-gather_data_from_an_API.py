@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """returns info todo list progress based on the userid."""
 import json
-import urllib.request
+import urllib
+import requests
 from sys import argv
 
 if __name__ == '__main__':
