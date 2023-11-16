@@ -18,7 +18,7 @@ if __name__ == '__main__':
             numberdone = len(donetasks)
             alltasks = len(jsondata)
 
-            first_str = f"Employer {name} is done with tasks"
+            first_str = f"Employee {name} is done with tasks"
 
             print(f"{first_str} ({numberdone}/{alltasks}):")
             for task in donetasks:
