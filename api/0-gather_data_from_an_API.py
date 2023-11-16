@@ -20,14 +20,16 @@ if __name__ == '__main__':
                 jsondata = json.loads(response.read())
                 if jsondata:
                     name = jsondata[0]['user']['name']
-                    donetasks = [task for task in jsondata if task['completed']]
-                    numberdone = len(donetasks)
+                    donetsks = [task for task in jsondata if task['completed']]
+                    numberdone = len(donetsks)
                     alltasks = len(jsondata)
 
                     first_str = f"Employee {name} is done with tasks"
 
-                    print(f"{first_str} ({numberdone}/{alltasks}):")
-                    for task in donetasks:
+                    print(
+                        f"{first_str} ({numberdone}/{alltasks}):"
+                    )
+                    for task in donetsks:
                         print(f"\t {task['title']}")
                 else:
                     print(f"No data found for user ID {user_id}")
