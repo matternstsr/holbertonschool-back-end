@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
     with urllib.request.urlopen(
         f'{url}/users/{user_id}/todos?_expand=user'
-        ) as response:
+            ) as response:
         if response.getcode() == 200:
             jsondata = json.loads(response.read())
             name = jsondata[0]['user']['name']
